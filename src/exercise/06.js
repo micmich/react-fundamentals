@@ -20,30 +20,28 @@ function UsernameForm({onSubmitUsername}) {
   // 🐨 make sure to associate the label to the input.
   // to do so, set the value of 'htmlFor' prop of the label to the id of input
   
-  const [inputText, setInput] = React.useState("");
+  const [isFailure, setFailure] = React.useState("");
   const refInput = React.useRef();
+
+  const checkValid = () => {
+    setFailure(refInput.current.value !== refInput.current.value.toLowerCase())
+  }
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    const userInput = refInput.current.value;
+    // const userInput = refInput.current.value;
+    const userInput = event.target.value;
     onSubmitUsername(userInput);
-  }
-
-  const beforeinput = (event) => {
-    let value = event.data;
-    if (value.toLowerCase() !== value) {
-      event.preventDefault();
-      console.log(`Veto: ${value}`) //
-    }
   }
 
   return (
     <form onSubmit={handleSubmit}>
       <div>
         <label>Username:</label>
-        <input type="text" ref={refInput} onBeforeInput={beforeinput} onChange={setInput} inputText={inputText} />
+        <input type="text" ref={refInput} onChange={checkValid}/>
       </div>
-      <button type="submit">Submit</button>
+      {isFailure ? <div style={{color: 'red'}}>Uppercase Characters not allowed</div> : <></>}
+      <button type="submit" disabled={isFailure}>Submit</button>
     </form>
   )
 }
