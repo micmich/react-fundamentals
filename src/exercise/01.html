@@ -1,3 +1,4 @@
+<!DOCTYPE HTML>
 <!-- Basic JavaScript-rendered Hello World -->
 <!-- http://localhost:3000/isolated/exercise/01.html -->
 
@@ -17,3 +18,20 @@
 <!-- 🐨 Append the div to the root div using `append` -->
 <!--   💰 document.getElementById('root') -->
 <!--   📜 https://developer.mozilla.org/en-US/docs/Web/API/ParentNode/append -->
+
+<script type="module">
+    const root = document.createElement("div");
+    root.setAttribute("id", "root");
+    document.body.append(root);
+
+    const el = document.createElement('div');
+    el.textContent = "Hello world";
+    el.className = "container";
+    
+    document.getElementById('root').append(el);    
+</script>
+
+<body>
+    <!-- <div id="root">
+    </div> -->
+</body>
